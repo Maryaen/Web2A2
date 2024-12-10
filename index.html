@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>F1 Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Dashboard</title>
+    <script src="script.js"></script>
 </head>
 <body>
-  <div id="app">
-<p>yuh</p>
-  </div>
-  <script src="script.js" defer></script>
+    <!-- Home View -->
+    <div id="home-view">
+        <h1>F1 Dashboard Project</h1>
+        <label for="season-select">Select a Season:</label>
+        <select id="season-select">
+            <option value="">-- Select Season --</option>
+        </select>
+        <button id="view-races">View Races</button>
+    </div>
+
+    <!-- Races View -->
+    <div id="races-view" class="hidden">
+        <h2>Races</h2>
+        <ul id="races-list"></ul>
+        <div id="race-details" class="hidden">
+            <h3>Race Details</h3>
+            <p id="race-info"></p>
+            <h4>Qualifying Results:</h4>
+            <ul id="qualifying-results"></ul>
+            <h4>Race Results:</h4>
+            <ul id="race-results"></ul>
+        </div>
+    </div>
+
+    <!-- Modal Popups -->
+    <dialog id="driver-popup" class="hidden">
+        <h3>Driver Details</h3>
+        <div id="driver-info"></div>
+        <button id="close-driver-popup">Close</button>
+    </dialog>
+
+    <dialog id="constructor-popup" class="hidden">
+        <h3>Constructor Details</h3>
+        <div id="constructor-info"></div>
+        <button id="close-constructor-popup">Close</button>
+    </dialog>
+
+    <dialog id="circuit-popup" class="hidden">
+        <h3>Circuit Details</h3>
+        <div id="circuit-info"></div>
+        <button id="close-circuit-popup">Close</button>
+    </dialog>
 </body>
 </html>
-
