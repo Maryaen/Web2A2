@@ -62,46 +62,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     async function displayRaceDetails(race) {
-    raceInfo.textContent = '';
+        raceInfo.textContent = '';
 
-    const raceName = document.createElement('p');
-    raceName.textContent = `Race Name: ${race.name}`;
-    raceInfo.appendChild(raceName);
+        const raceName = document.createElement('p');
+        raceName.textContent = `Race Name: ${race.name}`;
+        raceInfo.appendChild(raceName);
 
-    const raceDate = document.createElement('p');
-    raceDate.textContent = `Date: ${race.date}`;
-    raceInfo.appendChild(raceDate);
+        const raceDate = document.createElement('p');
+        raceDate.textContent = `Date: ${race.date}`;
+        raceInfo.appendChild(raceDate);
 
-    const raceTime = document.createElement('p');
-    raceTime.textContent = `Time: ${race.time}`;
-    raceInfo.appendChild(raceTime);
+        const raceTime = document.createElement('p');
+        raceTime.textContent = `Time: ${race.time}`;
+        raceInfo.appendChild(raceTime);
 
-    const circuitLink = document.createElement('a');
-    circuitLink.href = race.circuit.url;
-    circuitLink.target = '_blank';
-    circuitLink.textContent = `Circuit: ${race.circuit.name}`;
-    raceInfo.appendChild(circuitLink);
+        const circuitLink = document.createElement('a');
+        circuitLink.href = race.circuit.url;
+        circuitLink.target = '_blank';
+        circuitLink.textContent = `Circuit: ${race.circuit.name}`;
+        raceInfo.appendChild(circuitLink);
 
-    const location = document.createElement('p');
-    location.textContent = `Location: ${race.circuit.location}, ${race.circuit.country}`;
-    raceInfo.appendChild(location);
+        const location = document.createElement('p');
+        location.textContent = `Location: ${race.circuit.location}, ${race.circuit.country}`;
+        raceInfo.appendChild(location);
 
-    const qualifying = await fetchQualifyingResults(race.id);
-    qualifyingResults.textContent = '';
-    const qualifyingTitle = document.createElement('strong');
-    qualifyingTitle.textContent = 'Qualifying Results:';
-    qualifyingResults.appendChild(qualifyingTitle);
+        const qualifying = await fetchQualifyingResults(race.id);
+        qualifyingResults.textContent = '';
+        const qualifyingTitle = document.createElement('strong');
+        qualifyingTitle.textContent = 'Qualifying Results:';
+        qualifyingResults.appendChild(qualifyingTitle);
 
-    const qualifyingList = document.createElement('ul');
-    qualifying.forEach((result) => {
-        const listItem = document.createElement('li');
-        const driverName = `${result.driver.forename} ${result.driver.surname}`;
-        const constructorName = result.constructor.name;
-        const qualifyingTimes = `Q1: ${result.q1 || 'N/A'}, Q2: ${result.q2 || 'N/A'}, Q3: ${result.q3 || 'N/A'}`;
-        listItem.textContent = `${result.position}: ${driverName} (${constructorName}) - ${qualifyingTimes}`;
-        qualifyingList.appendChild(listItem);
-    });
-    qualifyingResults.appendChild(qualifyingList);
+        const qualifyingList = document.createElement('ul');
+        qualifying.forEach((result) => {
+            const listItem = document.createElement('li');
+            const driverName = `${result.driver.forename} ${result.driver.surname}`;
+            const constructorName = result.constructor.name;
+            const qualifyingTimes = `Q1: ${result.q1 || 'N/A'}, Q2: ${result.q2 || 'N/A'}, Q3: ${result.q3 || 'N/A'}`;
+            listItem.textContent = `${result.position}: ${driverName} (${constructorName}) - ${qualifyingTimes}`;
+            qualifyingList.appendChild(listItem);
+        });
+        qualifyingResults.appendChild(qualifyingList);
+
+        const results = await fetchRaceResults(race.id);
+        raceResults.textContent = '';
+        const resultsTitle = document.createElement('strong');
+        resultsTitle.textContent = 'Race Results:';
+        raceResults.appendChild(resultsTitle);
+    
+        const resultsList = document.createElement('ul');
+        results.forEach((result) => {
+            const listItem = document.createElement('li');
+            // Correctly use `driver` and `constructor` based on API response
+            const driverName = `${result.driver.forename} ${result.driver.surname}`;
+            const constructorName = result.constructor.name;
+            const points = result.points || 'N/A';
+            listItem.textContent = `${result.position}: ${driverName} (${constructorName}) - Points: ${points}`;
+            resultsList.appendChild(listItem);
+        });
+        raceResults.appendChild(resultsList);
 
 
     }
