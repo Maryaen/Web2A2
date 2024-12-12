@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #c20000;
+}
+
+
+select {
+    background-color: #ffffff;
+    border: 2px solid #c20000; 
+    color: #c20000;
+    font-size: 16px;
+    padding: 5px;
+    border-radius:
+    outline: none;
+}
+
+select option:hover,
+select option:checked {
+    background-color: #c20000; 
+    color: #ffffff; 
+}
+
+
+button {
+    background-color: #c20000; 
+    color: #ffffff;
+    font-size: 16px; 
+    padding: 5px 10px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+button:hover {
+    background-color: #a80000;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #c20000;
+}
+
+#races-view, #race-details, #race-info, #qualifying-results, #race-results {
+    background-color: #fff;
+    border: 2px solid #d71920;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+h2, h3, h4 {
+    font-size: 24px;
+    color: #c20000; 
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#races-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#races-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #d71920;
+}
+
+#races-list li:last-child {
+    border-bottom: none;
+}
+
+#races-list li:hover {
+    background-color: #f9ecec;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    border: 1px solid #d71920;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #d71920;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9ecec;
+}
+
+table tr:hover {
+    background-color: #fcdcdc;
+}
+
+h3 {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+h3 + div {
+    margin-top: -0.5rem;
+}
+
+#race-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+#race-info, #qualifying-results, #race-results {
+    margin-top: 0.5rem;
+}
+
+#races-view h3, #race-details h3 {
+    margin-bottom: 0;
+    padding-left: 0.5rem;
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+    top: -0.5rem;
+}
+
+#qualifying-results ul, #race-results ul {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#qualifying-results ul li, #race-results ul li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    font-size: 14px;
+}
+
+#qualifying-results ul li:last-child, #race-results ul li:last-child {
+    border-bottom: none; 
+}
+
+#qualifying-results ul li:hover, #race-results ul li:hover {
+    background-color: #f9f9f9;
+    cursor: pointer; 
+}
+
+#qualifying-results ul li span, #race-results ul li span {
+    flex: 1;
+    text-align: left;
+}
+
+#qualifying-results ul li span:first-child, #race-results ul li span:first-child {
+    font-weight: bold; 
+    flex: 0.2; 
+}
+/* ChatGPT helped me with more than half of this style sheet */

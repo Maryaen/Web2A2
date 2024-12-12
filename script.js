@@ -63,65 +63,88 @@ document.addEventListener('DOMContentLoaded', () => {
     
     async function displayRaceDetails(race) {
         raceInfo.textContent = '';
-
+        qualifyingResults.textContent = '';
+        raceResults.textContent = '';
+    
         const raceName = document.createElement('p');
         raceName.textContent = `Race Name: ${race.name}`;
         raceInfo.appendChild(raceName);
-
+    
         const raceDate = document.createElement('p');
         raceDate.textContent = `Date: ${race.date}`;
         raceInfo.appendChild(raceDate);
-
+    
         const raceTime = document.createElement('p');
         raceTime.textContent = `Time: ${race.time}`;
         raceInfo.appendChild(raceTime);
-
+    
         const circuitLink = document.createElement('a');
         circuitLink.href = race.circuit.url;
         circuitLink.target = '_blank';
         circuitLink.textContent = `Circuit: ${race.circuit.name}`;
         raceInfo.appendChild(circuitLink);
-
+    
         const location = document.createElement('p');
         location.textContent = `Location: ${race.circuit.location}, ${race.circuit.country}`;
         raceInfo.appendChild(location);
-
+    
         const qualifying = await fetchQualifyingResults(race.id);
-        qualifyingResults.textContent = '';
-        const qualifyingTitle = document.createElement('strong');
-        qualifyingTitle.textContent = 'Qualifying Results:';
-        qualifyingResults.appendChild(qualifyingTitle);
-
         const qualifyingList = document.createElement('ul');
         qualifying.forEach((result) => {
             const listItem = document.createElement('li');
-            const driverName = `${result.driver.forename} ${result.driver.surname}`;
-            const constructorName = result.constructor.name;
-            const qualifyingTimes = `Q1: ${result.q1 || 'N/A'}, Q2: ${result.q2 || 'N/A'}, Q3: ${result.q3 || 'N/A'}`;
-            listItem.textContent = `${result.position}: ${driverName} (${constructorName}) - ${qualifyingTimes}`;
+    
+            const position = document.createElement('span');
+            position.textContent = result.position;
+            listItem.appendChild(position);
+    
+            const driverName = document.createElement('span');
+            driverName.textContent = `${result.driver.forename} ${result.driver.surname}`;
+            listItem.appendChild(driverName);
+    
+            const constructorName = document.createElement('span');
+            constructorName.textContent = result.constructor.name;
+            listItem.appendChild(constructorName);
+    
+            const q1 = document.createElement('span');
+            q1.textContent = `Q1: ${result.q1 || 'N/A'}`;
+            listItem.appendChild(q1);
+    
+            const q2 = document.createElement('span');
+            q2.textContent = `Q2: ${result.q2 || 'N/A'}`;
+            listItem.appendChild(q2);
+    
+            const q3 = document.createElement('span');
+            q3.textContent = `Q3: ${result.q3 || 'N/A'}`;
+            listItem.appendChild(q3);
+    
             qualifyingList.appendChild(listItem);
         });
         qualifyingResults.appendChild(qualifyingList);
-
-        const results = await fetchRaceResults(race.id);
-        raceResults.textContent = '';
-        const resultsTitle = document.createElement('strong');
-        resultsTitle.textContent = 'Race Results:';
-        raceResults.appendChild(resultsTitle);
     
+        const results = await fetchRaceResults(race.id);
         const resultsList = document.createElement('ul');
         results.forEach((result) => {
             const listItem = document.createElement('li');
-            // Correctly use `driver` and `constructor` based on API response
-            const driverName = `${result.driver.forename} ${result.driver.surname}`;
-            const constructorName = result.constructor.name;
-            const points = result.points || 'N/A';
-            listItem.textContent = `${result.position}: ${driverName} (${constructorName}) - Points: ${points}`;
+    
+            const position = document.createElement('span');
+            position.textContent = result.position;
+            listItem.appendChild(position);
+    
+            const driverName = document.createElement('span');
+            driverName.textContent = `${result.driver.forename} ${result.driver.surname}`;
+            listItem.appendChild(driverName);
+    
+            const constructorName = document.createElement('span');
+            constructorName.textContent = result.constructor.name;
+            listItem.appendChild(constructorName);
+    
+            const points = document.createElement('span');
+            points.textContent = `Points: ${result.points || 'N/A'}`;
+            listItem.appendChild(points);
+    
             resultsList.appendChild(listItem);
         });
         raceResults.appendChild(resultsList);
-
-
     }
     
     viewRacesButton.addEventListener('click', async () => {
